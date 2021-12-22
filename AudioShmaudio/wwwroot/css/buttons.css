@@ -1,0 +1,23 @@
+﻿.button-play {
+    width: 30px;
+    height: 30px;
+    background-color: #542346;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 8px;
+    margin:2px 1px;
+    border-radius: 100%;
+}
+
+.button-pause {
+    width: 30px;
+    height: 30px;
+    background-color: #542346;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 8px;
+    margin: 2px 1px;
+    border-radius: 100%;
+}

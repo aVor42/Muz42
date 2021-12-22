@@ -1,0 +1,54 @@
+﻿@model AudioShmaudio.Models.ArtistViewModel
+
+<h3>@Model.Name</h3>
+
+<div class="artist-about">
+    <p>
+        <img src="@Url.Action("ArtistPhoto", "Artist", new {id = Model.Id})" height="150" width="150" class="leftimg"/>
+       @Model.Description
+    </p>
+   
+</div>
+
+<h4>Комозиции</h4>
+<div class="artist-songs songs-list">
+
+</div>
+
+<script>
+
+    @foreach(var song in Model.Songs)
+    {
+        <text>
+
+            $('.artist-songs').append(
+                getSongViewNormal(@song.Id, 
+                    @song.Artist.Id, '@song.Name', 
+                    '@song.Artist.Name', '@song.Duration'));
+        </text>
+    }
+
+    $('.artist-songs').children('.songLine').each((index, element) => {
+        
+        let isAuthenticated  = '@User.Identity.IsAuthenticated' === 'True';
+
+        $.get(
+            '/Song/PlaylistContainsSong?songId=' + element.getAttribute('data-song-id'),
+            (result) => {
+                
+                let playlistContainsSong = result;
+                if (isAuthenticated) {
+                    if (playlistContainsSong) {
+                        $(element).append(getRemoveSongIcon());
+                    }
+                    else {
+                        $(element).append(getAddSongIcon());
+                    }
+                }
+
+            }
+        );
+
+
+    });
+</script>

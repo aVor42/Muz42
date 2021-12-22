@@ -1,0 +1,37 @@
+﻿@model AudioShmaudio.Models.RegisterViewModel
+
+<div class="container registration-container">
+        <div class="registration-title">
+        <h2>Регистрация</h2>
+    </div>
+    <div class="registration-form">
+        <form method="post" asp-controller="Account" asp-action="Registration">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label><br />
+                <input asp-for="Login" class="form-control"/>
+                <span asp-validation-for="Login"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label><br />
+                <input asp-for="UserName" class="form-control"/>
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label><br />
+                <input asp-for="Password" class="form-control"/>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label><br />
+                <input asp-for="ConfirmPassword" class="form-control"/>
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+             <div>
+                <input type="submit" value="Зарегистрироваться" class="btn btn-default" style="background-color:white; float: right;"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+

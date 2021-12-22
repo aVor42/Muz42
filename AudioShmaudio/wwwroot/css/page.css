@@ -1,0 +1,142 @@
+﻿* {
+    margin: 0; /* zero out margin */
+    padding: 0; /* zero out padding */
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+    .box header {
+        flex: 0 1 auto;
+        height: 50px;
+        width: 100%;
+        background-color: #8c42b3;
+        color: #edfaff
+    }
+
+    .box .row.content {
+        flex: 1 0 auto;
+        padding-bottom: 30px;
+        background: #fff; /* цвет фона, белый */
+    }
+        .box .row.content .main-content {
+            margin: 0; /* zero out margin */
+            padding: 0; /* zero out padding */
+            width: 897px;
+            height: 643px;
+            overflow: auto; /* свойство для прокрутки по горизонтали. Автоматом, если больше блока */
+        }
+
+    .box footer {
+        flex: 0 1 auto;
+        background-color: #8c42b3;
+        color: #edfaff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 30px;
+    }
+
+.username-zone:hover {
+    background-color: #9d5ebe;
+    cursor:pointer;
+}
+
+.main-content::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f9f9fd;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #d691b6;
+}
+
+.main-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: #f9f9fd;
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.popup-menu-item {
+    width: 100%;
+    border: hidden;
+}
+
+    .popup-menu-item:hover {
+        background-color: #9d5ebe;
+        cursor: pointer;
+    }
+
+.submit {
+    background-color: #f9efff;
+    border-radius: 9%;
+    border: 3px solid #9d5ebe;
+}
+
+.leftimg {
+    float: left; /* Выравнивание по левому краю */
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+    border-radius: 100%;
+}
+
+.rightimg {
+    float: right; /* Выравнивание по правому краю  */
+    margin: 7px 0 7px 7px; /* Отступы вокруг картинки */
+    border-radius: 100%;
+}
+
+#general-search-input {
+    width: 45%;
+    height: 66%;
+    background-color: #823fa5;
+    color: #faf1ff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: table-cell;
+    vertical-align: middle;
+}

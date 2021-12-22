@@ -1,0 +1,30 @@
+﻿@using AudioShmaudio.Models
+@model SongViewModel
+
+<h3>Добавить композицию</h3>
+
+<form asp-action="CreateSong" asp-controller="song" enctype="multipart/form-data">
+    <div class="form-group">
+        <input asp-for="Name" class="form-control" style="width:350px;"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="ArtistId" />
+        <select asp-for="ArtistId" class="form-control">
+            <option class="default" value="-1">-- Выберете артиста --</option>
+            @foreach(var artist in Model.Artists)
+            {
+                <option value="@artist.Id">@artist.Name</option>
+            }
+        </select>
+    </div>
+    <div style="margin-top:50px">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" class="form-control" style="width:100px;" />
+    </div>
+    <div style="margin-top:20px">
+        <input id="input-artist-photo" asp-for="File" type="file" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-default submit" style="margin-top: 30px" />
+    </div>
+</form>

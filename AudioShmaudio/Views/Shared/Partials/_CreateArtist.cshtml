@@ -1,0 +1,25 @@
+﻿@model AudioShmaudio.Models.ArtistViewModel
+
+<h3>Добавить артиста</h3>
+
+<form asp-action="CreateArtist" asp-controller="artist" enctype="multipart/form-data">
+    <div class="form-group">
+        <input asp-for="Name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <input asp-for="Description" class="form-control"/>
+    </div>
+    <div>
+        <div id="drop-container-artist-photo" draggable="true" 
+        ondrop="dropArtistPhoto(event)"
+        ondragover="dragArtistPhoto(event)"
+        ondragenter="dragArtistPhoto(event)"
+        style="width: 150px; height: 150px;">
+            <img src="img/default_artist.png" id="img-artist-photo" height="150" width="150" class="leftimg"  style="border:1px solid black;"/>
+        </div>
+        <input id="input-artist-photo" asp-for="Photo" type="file" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-default submit" style="margin-top: 30px" />
+    </div>
+</form>

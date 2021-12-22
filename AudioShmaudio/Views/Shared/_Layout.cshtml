@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="/js/site.js"></script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/js/songs.js"></script>
+    <script src="/lib/howler/howler.js"></script>
+    <script src="js/artist.js"></script>
+    <script src="js/accounts.js"></script>
+    <link rel="stylesheet" href="~/css/page.css" />
+    <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/LogIn.css" />
+    <link rel="stylesheet" href="~/css/registration.css" />
+    <link rel="stylesheet" href="/css/songs.css" />
+    <link rel="stylesheet" href="/css/player.css" />
+</head>
+<body>
+
+    <div class="box">
+
+        <header>
+            <div class="row">
+
+
+                <div class="col-lg-1 text-center" style="line-height:40px;">
+                    <span style="vertical-align: middle">
+                        <span class="logo-text"><img src="/img/logo.png" height="50"></span>
+                    </span>
+
+                </div>
+                <div class="col-lg-8 text-center" style="line-height:40px;">
+                    <span style="vertical-align: middle">
+                        <input id="general-search-input" class="form-control" onkeyup="searchInputKeyDown()" />
+                    </span>
+
+                </div>
+                <div class="col-lg-3 username-zone text-center dropdown" style="line-height:40px;">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div style="vertical-align: middle">
+                             <div>@User.Identity.Name</div>
+                        </div>
+                        <div class="dropdown-content">
+                            <input type="button" class="popup-menu-item" id="popup-menu-user-playlist" value="Моя музыка" />
+
+                            @if(User.IsInRole("admin") || User.IsInRole("moderator")){
+
+                                <input type="button" class="popup-menu-item" id="popup-menu-add-artist" value="Добавить артиста" />
+                                <input type="button" class="popup-menu-item" id="popup-menu-add-song" value="Добавить песню" />
+                            }
+                            @if(User.IsInRole("admin")){
+                                <input type="button" class="popup-menu-item" id="popup-menu-userlist" value="Список пользователей" />
+                            }
+
+                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                                <div>
+                                    <input type="submit" class="popup-menu-item" value="Выйти" />
+                                </div>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="vertical-align: middle">
+                            <div class="login-button">
+                                Войти
+                                </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </header>
+
+        <div class="row content">
+                @RenderBody()
+        </div>
+
+
+
+        <footer>
+            <div>
+                <span class="glyphicon glyphicon-asterisk"></span>
+                &copy Voronkov.AD
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+
+        $('.login-button').click(function(){
+            event.preventDefault();
+            window.location.href = '@Url.Action("LogIn", "Account")';
+        });
+
+        $('#popup-menu-add-artist').click(function (){
+            $.ajax({
+                url: '@Url.Action("CreateArtist", "Artist")',
+                type: 'GET',
+                success: function (data) {
+                    $('.main-content').html(data);
+                },
+                error: function () {
+                    alert('Ошибочка');
+                }
+            });
+        });
+
+        $('#popup-menu-add-song').click(function (){
+            $.ajax({
+                url: '@Url.Action("CreateSong", "Song")',
+                type: 'GET',
+                success: function (data) {
+                    $('.main-content').html(data);
+                },
+                error: function () {
+                    alert('Ошибочка');
+                }
+            });
+        });
+
+        $('#popup-menu-user-playlist').click(function (){
+            $.ajax({
+                url: '@Url.Action("UserPlaylist", "Song")',
+                type: 'GET',
+                success: function (data) {
+                    $('.main-content').html(data);
+                },
+                error: function () {
+                    alert('Ошибочка');
+                }
+            });
+        });
+
+        $('#popup-menu-userlist').click(function(){
+            $.ajax({
+                url: '@Url.Action("UsersList", "Account")',
+                type: 'GET',
+                success: function (data) {
+                    $('.main-content').html(data);
+                },
+                error: function () {
+                    alert('Ошибочка');
+                }
+            });
+        })
+    </script>
+
+</body>
+
+</html>

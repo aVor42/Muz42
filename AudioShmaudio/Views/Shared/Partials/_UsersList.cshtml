@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AudioShmaudio.Models.UsersRoles>
+
+    <table class="table">
+        <tr><td>Логин</td><td>Имя</td><td>Роль</td></tr>
+        @foreach(var userRoles in Model)
+    {
+        <tr>
+            <td>@userRoles.User.Login</td>
+            <td>@userRoles.User.UserName</td>
+            @if(userRoles.Roles.Count > 0)
+            {
+                switch (@userRoles.Roles[0])
+                {
+                    case "admin": <td></td> break;
+                    case "moderator": <td><button class="btn btn-secondary" onclick="removeModer(this)" data-user-id="@userRoles.User.Id">-</button></td>  break;
+                    case "user": <td><button class="btn btn-info" onclick="addModer(this)" data-user-id="@userRoles.User.Id">+</button></td>  break;
+                }
+            }
+            else
+            {
+                <td></td>
+            }
+        </tr>
+
+
+    }
+</table>

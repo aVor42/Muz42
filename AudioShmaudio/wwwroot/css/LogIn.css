@@ -1,0 +1,34 @@
+﻿.login-container {
+    border: solid;
+    width: 25%;
+    height: 250px;
+    border-radius: 15px 15px 15px 15px;
+    border-color: #8c4fbf;
+    position: absolute; /* Абсолютное позиционирование */
+    left: 50%; /* Положение слоя от левого края */
+    top: 50%; /* Положение слоя от верхнего края */
+    margin-left: -12%; /* Отступ слева */
+    margin-top: -13%; /* Отступ сверху */
+    background-color: #fff2fd;
+}
+
+.login-title {
+    background-color: #8c42b3;
+    color: beige;
+    width: 110%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+
+    padding-left:10%;
+    margin-left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translateX(-50%);
+    border-radius: 11px 11px 0 0;
+    overflow: hidden;
+    z-index: 2;
+
+}
+
+.login-form {
+
+}

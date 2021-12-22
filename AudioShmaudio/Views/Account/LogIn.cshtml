@@ -1,0 +1,38 @@
+﻿@model AudioShmaudio.Models.LogInViewModel
+ 
+
+<div class="container login-container">
+    <div class="login-title">
+        <h2>Войти</h2>
+    </div>
+    <div class="login-form">
+    <form method="post" asp-controller="Account" asp-action="Login"
+      asp-route-returnUrl="@Model.ReturnUrl">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div style="margin-top:10px">
+        <input asp-for="Login" class="form-control"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div style="margin-top:10px">
+        <input asp-for="Password"  class="form-control" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="RememberMe" /> <label asp-for="RememberMe"></label>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default registration-button" style="background-color:white; float: right;">Регистрация</button>
+        <input type="submit" value="Войти"  class="btn btn-default" style="background-color:white; float: right; margin-right: 10px"/>
+    </div>
+    </form>
+    </div>
+
+</div>
+
+<script>
+    $('.registration-button').click(function(){
+        event.preventDefault();
+        window.location.href = '@Url.Action("Registration", "Account")';
+    });
+</script>
+

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AudioShmaudio.Models.Song>
+
+<h3>Результаты поиска:</h3>
+
+<div class="global-search-songs songs-list">
+
+</div>
+
+<script>
+    @foreach(var song in Model)
+    {
+        <text>
+            $('.global-search-songs').append(getSongViewNormal(@song.Id, @song.Artist.Id, '@song.Name', '@song.Artist.Name', '@song.Duration'));
+        </text>
+    }
+
+        $('.global-search-songs').children('.songLine').each((index, element) => {
+        
+        let isAuthenticated  = '@User.Identity.IsAuthenticated' === 'True';
+
+        $.get(
+            '/Song/PlaylistContainsSong?songId=' + element.getAttribute('data-song-id'),
+            (result) => {
+                
+                let playlistContainsSong = result;
+                if (isAuthenticated) {
+                    if (playlistContainsSong) {
+                        $(element).append(getRemoveSongIcon());
+                    }
+                    else {
+                        $(element).append(getAddSongIcon());
+                    }
+                }
+
+            }
+        );
+
+
+    });
+</script>

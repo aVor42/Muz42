@@ -1,0 +1,163 @@
+﻿@model IEnumerable<AudioShmaudio.Models.Song>
+@{
+    ViewData["Title"] = "Муз42";
+}
+
+
+<div class="col-lg-2" style="background-color: #a99aa6">
+   @* <p>Тут будет чарт</p>
+    <button onclick="test(this)">test</button>*@
+    <h5 style="text-align:center">Топ 10:</h5>
+
+    <div class="songs-list top-songs">
+            @foreach(var song in Model)
+            {
+                <div class="songLine" data-song-id="@song.Id">
+                    <span class="play-pause-button">
+                        <button class="button-play reduced-button-play"
+                            data-song-id="@song.Id"
+                            data-artist-id="@song.Artist.Id"
+                            data-song-name="@song.Name"
+                            data-artist-name="@song.Artist.Name"
+                            style="vertical-align:middle"
+                            onclick="playButtonClick(this)">
+                                <img class="img-play-button-reduced" src="/img/play_img.png"/>
+                        </button>
+                    </span>
+
+                    <span class="reduced-song-name">@song.Name</span>
+                </div>
+            }
+    </div>
+</div>
+<div class="col-lg-7">
+    <div class="main-content">
+  
+    </div>
+</div>
+<div class="col-lg-3" style="background-color: #a99aa6">
+
+    <div class="player-container container" hidden="hidden">
+        <div class="player-song-picture">
+            <img src="img/default_audio.png" height="200" width="200" style="border-radius:100%" />
+        </div>
+
+                <div class="container">
+            <div id="player-song-name"></div>
+        </div>
+
+        <div class="duration-container container">
+            <div class="time-container">
+                <span id="player-song-duration-current">0:00</span>
+                <span id="player-song-duration">0:00</span>
+            </div>
+            <div class="timeline-container">
+                <div class="slidecontainer">
+                    <input type="range" 
+                    onmousedown="stopMovingTimeline()" onmouseup="TimelineMouseUp(this)" 
+                    class="slider slider-progress" value="0" max="1000" id="timeline-slider" 
+                    style="width: 100%; --value:1; --min:0; --max:1000;">
+                </div>
+                
+           </div>
+        </div>
+
+        <div class="row">
+            <div class="button-container col-6">
+
+                <button onClick="playPrevSong()" class="player-switching-songs" style="margin-left: 20px;"><</button>
+                <span>
+                    <button class="player-button-play button-play">
+                        <img class="img-player-button-play" src="/img/play_img.png" />
+                    </button>
+                </span>
+                <button onClick="playNextSong()" class="player-switching-songs">></button>
+
+            </div>
+            <div class="volume-container col-6">
+                <input type="range" value="56" class="slider slider-progress" id="volume-slider" style="width: 90%; --value:56; --min:0; --max:100;">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    <script>
+
+        function test(event){
+        $.ajax({
+            url: '@Url.Action("PlaylistContainsSong", "Song", new {songId = 0})',
+            type: 'GET',
+            success: function (data) {
+                alert('Hello');
+            },
+            error: function () {
+            }
+        });
+        }
+
+        for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+            e.style.setProperty('--value', e.value);
+            e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+            if(e.id == 'timeline-slider')
+                e.style.setProperty('--max', e.max == '' ? '1000' : e.max);
+            else
+                e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+            e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+        }
+
+        $(".player-button-play").click(function(){
+            playSong();
+        });
+
+        $("#volume-slider").change(function(){
+            setVolume(this.value);
+        });
+
+    $(".button-first").click(function () {
+        $.ajax({
+            url: '@Url.Action("CreateSong", "Song")',
+            type: 'GET',
+            success: function (data) {
+                $('.main-content').html(data);
+            },
+            error: function () {
+                alert('Ошибочка');
+            }
+        });
+
+    });
+
+        $(".button-second").click(function () {
+        $.ajax({
+            url: '@Url.Action("ArtistPage", "Artist", new { id = 2})',
+            type: 'GET',
+            success: function (data) {
+                $('.main-content').html(data);
+            },
+            error: function () {
+                alert('Ошибочка');
+            }
+        });
+
+    });
+
+    $(".button-theard").click(function () {
+        $.ajax({
+            url: '@Url.Action("ArtistPage", "Artist", new { id = 1})',
+            type: 'GET',
+            success: function (data) {
+                $('.main-content').html(data);
+            },
+            error: function () {
+                alert('Ошибочка');
+            }
+        });
+
+    });
+    </script>
+
+
